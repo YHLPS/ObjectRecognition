@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>License Plate Detector</title>
+  <style>
+    /* Basic styling for the video and highlighter */
+    video {
+      width: 640px;
+      height: 480px;
+    }
+    .highlighter {
+      position: absolute;
+      border: 2px solid green;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="licensePlateInput" placeholder="Enter license plate number">
+  <video id="video"></video>
+
+  <script>
+    // Your existing JavaScript code here...
+
+    // Additional JavaScript for license plate detection and highlighting
+    const licensePlateInput = document.getElementById('licensePlateInput');
+
+    // Function to check if the detected text matches the input license plate
+    function checkLicensePlate(detectionText, inputPlate) {
+      return detectionText.toLowerCase().includes(inputPlate.toLowerCase());
+    }
+
+    // Modified displayVideoDetections function to handle license plate highlighting
+    function displayVideoDetections(result) {
+      // ... your existing code ...
+
+      for (let detection of result.detections) {
+        // ... your existing code ...
+
+        if (checkLicensePlate(detection.categories[0].categoryName, licensePlateInput.value)) {
+          // Highlight the license plate in green
+          // ... your existing code for highlighter ...
+        } else {
+          // Check if the input license plate is not present, even if other plates are detected
+          if (licensePlateInput.value !== '') {
+            // Display a message indicating the absence of the input license plate
+            console.log('License plate not found.');
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
